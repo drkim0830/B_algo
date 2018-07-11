@@ -28,6 +28,14 @@ int* goldbach(int prime[], int n) {
 			break;
 		}
 		a = prime[i];
+		int temp = n - a;
+		if (c[temp] == false) {
+			result[0] = a;
+			result[1] = temp;
+			return result;
+		}
+
+		/* - 런타임 에러
 		for (int j = i; j < n; j++) {
 			if (prime[j] < 0) {
 				break;
@@ -39,6 +47,7 @@ int* goldbach(int prime[], int n) {
 				return result;
 			}
 		}
+		*/
 	}
 
 	return result;
