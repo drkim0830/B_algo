@@ -29,30 +29,29 @@ ex)
 
 using namespace std;
 
+vector<vector<int>> vec(1001);
 bool check[1001] = { false };
 
-vector<vector<int>> input_edge(vector<vector<int>> vec, int edge) {
+void input_edge(int edge) {
 	for (int i = 0; i < edge; i++) {
 		int u, v;
 		scanf("%d %d", &u, &v);
 		vec[u].push_back(v);
 		vec[v].push_back(u);
 	}
-
-	return vec;
 }
 
-void dfs(vector<vector<int>> vec, int vertex) {
+void dfs(int vertex) {
 	check[vertex] = true;
 	printf("%d ", vertex);
 	for (int i = 0; i < vec[vertex].size(); i++) {
 		if (check[vec[vertex][i]] == false) {
-			dfs(vec, vec[vertex][i]);
+			dfs(vec[vertex][i]);
 		}
 	}	
 }
 
-void bfs(vector<vector<int>> vec, int vertex) {
+void bfs(int vertex) {
 	queue<int> q;
 	q.push(vertex);
 	check[vertex] = true;
@@ -75,18 +74,17 @@ int main() {
 	int node, edge, first_vertex;
 	scanf("%d %d %d", &node, &edge, &first_vertex);
 	//using vector - linked list
-	vector<vector<int>> vec(node+1);
 
-	vec = input_edge(vec, edge);
+	input_edge(edge);
 
 	for (int i = 1; i <= node; i++) {
 		sort(vec[i].begin(), vec[i].end());
 	}
 
-	dfs(vec, first_vertex);
+	dfs(first_vertex);
 	printf("\n");
 	memset(check, false, 1001);
-	bfs(vec, first_vertex);
+	bfs(first_vertex);
 
 	return 0;
 }
