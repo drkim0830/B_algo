@@ -2,6 +2,7 @@
 
 #include<iostream>
 #include<vector>
+#include<queue>
 
 using namespace std;
 
@@ -17,6 +18,8 @@ void input_edge(int edge) {
 		vec[v].push_back(u);
 	}
 }
+/*
+using DFS
 
 void dfs(int vertex) {
 	check[vertex] = true;
@@ -26,11 +29,31 @@ void dfs(int vertex) {
 		}
 	}
 }
+*/
 
+void bfs(int vertex) {
+	queue<int> q;
+	q.push(vertex);
+	check[vertex] = true;
+	while (!q.empty()) {
+		int front = q.front();
+		q.pop();
+		//printf("%d ", front);
+
+		for (int i = 0; i < vec[front].size(); i++) {
+			int next = vec[front][i];
+			if (check[next] == false) {
+				check[next] = true;
+				q.push(next);
+			}
+		}
+	}
+}
 void checkConnectedComponent(int node) {
 	for (int i = 1; i <= node; i++) {
 		if (check[i] == false) {
-			dfs(i);
+			//dfs(i);
+			bfs(i);
 			cnt++;
 		}
 	}
