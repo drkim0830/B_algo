@@ -6,7 +6,7 @@ using namespace std;
 
 int** maze;
 int** check;
-int dx[] = { 0,1,1,-1 };
+int dx[] = { 0,1,0,-1 };
 int dy[] = { 1,0,-1,0 };
 int cnt = 1;
 int n, m;
